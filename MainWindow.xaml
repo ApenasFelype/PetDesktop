@@ -1,0 +1,31 @@
+﻿<Window x:Class="PetDesktop.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PetDesktop"
+        mc:Ignorable="d"
+        WindowStyle="none"
+        Background="Transparent"
+        AllowsTransparency="True"
+        Topmost="True"
+        ShowInTaskbar="True"
+        Title="PetDesktop" Height="128" Width="128">
+
+
+    <Grid
+        MouseLeftButtonDown="CatMouseDown">
+
+
+        <Image x:Name="CatImage"
+           Width="128"
+           Height="128"
+           Source="/source/Sprites/Cat_idle/cat_idle_front.png"
+           RenderOptions.BitmapScalingMode="NearestNeighbor">
+            
+        </Image>
+        
+
+    </Grid>
+
+</Window>
