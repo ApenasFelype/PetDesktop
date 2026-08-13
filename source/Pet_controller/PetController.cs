@@ -3,6 +3,7 @@ using System;
 using System.Windows;
 using System.Windows.Threading;
 using System.Windows.Input;
+using PetDesktop.source.UI_status;
 
 namespace PetDesktop
 {
@@ -11,6 +12,9 @@ namespace PetDesktop
         //estado atual do gato
         private PetState state = PetState.Walking;
         private int stateCounter = 0;
+
+        //Necessidades
+        public PetNeeds? Needs;
 
         //animação
         private PetAnimation animation;
@@ -44,6 +48,7 @@ namespace PetDesktop
         public PetController(MainWindow window)
         {
             this.window = window;
+            Needs = new PetNeeds(this);
             animation = new PetAnimation();
         }
 
@@ -59,6 +64,9 @@ namespace PetDesktop
 
         private void UpdatePet(object? sender, EventArgs e)
         {
+            Needs.UpdateNeeds();
+            
+
             ImFly();
             if (isDragging)
                 return;
@@ -75,8 +83,11 @@ namespace PetDesktop
                 case PetState.Idle:
                     IdlePet();
                     break;
-            }
 
+                case PetState.Sleeping:
+                    Sleeping();
+                    break;
+            }       
         }
         //gravidade + agarra e arrasta com o mouse + queda livre
         private void GravityState()
@@ -85,13 +96,27 @@ namespace PetDesktop
 
             double nextTop = window.Top + velocityY;
 
-            if (nextTop + window.Height >= ground + 31)
+            if (state == PetState.Sleeping)
             {
-                window.Top = ground - window.Height + 31;
-                velocityY = 0;
-                
-                return;
+                if (nextTop + window.Height >= ground + 32)
+                {
+                    window.Top = ground - window.Height + 51;
+                    velocityY = 0;
+
+                    return;
+                }
             }
+            else
+            {
+                if (nextTop + window.Height >= ground + 32)
+                {
+                    window.Top = ground - window.Height + 32;
+                    velocityY = 0;
+
+                    return;
+                }
+            }
+
 
             window.Top = nextTop;
         }
@@ -106,6 +131,7 @@ namespace PetDesktop
             }
             if (state == PetState.holding)
             {
+                IdleChance = 0;
                 state = PetState.Idle;
             }
             
@@ -129,7 +155,7 @@ namespace PetDesktop
         }
 
         //mudando o state do gato
-        private void ChangeState(PetState newState)
+        public void ChangeState(PetState newState)
         {
             state = newState;
             stateCounter = 0;
@@ -167,6 +193,18 @@ namespace PetDesktop
 
         //ação + animação
 
+        public void Sleeping()
+        {
+            window.CatImage.Source = animation.GetSleeping();
+
+            Needs.Sleep += 0.1;
+
+            if (Needs.Sleep >= 100)
+            {
+                Needs.Sleep = 100;
+                ChooseNextState();
+            }
+        }
         public void IdlePet()
         {
             switch (IdleChance)

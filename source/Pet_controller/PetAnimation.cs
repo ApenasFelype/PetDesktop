@@ -85,5 +85,12 @@ namespace PetDesktop
 
             return sprite;
         }
+
+        //sprite do gato dormindo
+        public BitmapImage GetSleeping()
+        {
+            BitmapImage sprite = new BitmapImage(new Uri("/source/Sprites/Cat_Sleeping/cat_sleeping1.png", UriKind.Relative));
+            return sprite;
+        }
     }
 }

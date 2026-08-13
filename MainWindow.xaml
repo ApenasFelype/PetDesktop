@@ -14,8 +14,9 @@
 
 
     <Grid
+        
+        MouseRightButtonDown="CatRightClick"
         MouseLeftButtonDown="CatMouseDown">
-
 
         <Image x:Name="CatImage"
            Width="128"

@@ -30,6 +30,7 @@ Seu comportamento é controlado através de diferentes estados, como:
 
 * **Idle:** o gato fica parado.
 * **Walking:** o gato se movimenta horizontalmente.
+* **Painel de status** Botão direito do mouse agora abre as necessidades do seu gato. Fome, sede e sono (Nenhuma consequencia por enquanto).
 * **Gravity:** o gato cai quando não está apoiado em uma superfície.
 * **Dragging:** o usuário pode clicar e arrastar o gato pela tela.
 
@@ -41,8 +42,9 @@ Algumas ideias para próximas versões:
 
 * [ ] Reagir dependendo da forma de interação com mouse ou teclado
 * [ ] Mais estados de comportamento
-* [ ] Sistema de comida
-* [ ] Sistema de Sono
+* [x] Sistema de comida
+* [x] Sistema de sede
+* [x] Sistema de Sono
 * [ ] Sistema de felicidade/necessidades
 * [ ] Configurações do pet
 * [ ] Mais tipos de pets/cor do gato

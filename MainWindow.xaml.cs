@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using PetDesktop.source.UI_status;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -18,6 +19,7 @@ namespace PetDesktop
     public partial class MainWindow : Window
     {
         private PetController controller;
+        public PetStatus StatusWindow;
 
         public MainWindow()
         {
@@ -28,6 +30,7 @@ namespace PetDesktop
 
             controller = new PetController(this);
             controller.ControllerMain();
+            
         }
 
         private void CatMouseDown(object sender, MouseButtonEventArgs e)
@@ -41,6 +44,15 @@ namespace PetDesktop
 
                 controller.StopDragging();
             }
+        }
+
+        private void CatRightClick(Object sender, MouseButtonEventArgs e)
+        {
+            StatusWindow = new PetStatus(controller.Needs);
+            StatusWindow.UpdateControl();
+            StatusWindow.Show();
+
+            e.Handled = true;
         }
          
     }
